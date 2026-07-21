@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+    <link rel="stylesheet" href="student.css">
+</head>
+<body>
+
+    <h2>Student Registration Form</h2>
+
+    <form>
+
+        <label>Student Name:</label><br>
+        <input type="text" name="name" placeholder="Enter your name" required>
+        <br><br>
+
+        <label>Email ID:</label><br>
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <br><br>
+
+        <label>Phone Number:</label><br>
+        <input type="tel" name="phone" placeholder="Enter your phone number" maxlength="10" required>
+        <br><br>
+
+        <label>Password:</label><br>
+        <input type="password" name="password" placeholder="Enter your password" required>
+        <br><br>
+
+        <label>Date of Birth:</label><br>
+        <input type="date" name="dob">
+        <br><br>
+
+        <label>Address:</label><br>
+        <textarea name="address" rows="4" placeholder="Enter your address"></textarea>
+        <br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="radio" name="gender" value="Other"> Other
+        <br><br>
+
+        <label>Course:</label><br>
+        <input type="checkbox" name="course" value="CSE"> CSE
+        <input type="checkbox" name="course" value="ECE"> ECE
+        <input type="checkbox" name="course" value="IT"> IT
+        <br><br>
+
+        <label>Department:</label><br>
+        <select name="department">
+            <option>Select Department</option>
+            <option>Computer Science Engineering (CSE)</option>
+            <option>Electronics and Communication Engineering (ECE)</option>
+            <option>Information Technology (IT)</option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="Register">
+        <input type="reset" value="Clear">
+
+    </form>
+
+</body>
+</html>
