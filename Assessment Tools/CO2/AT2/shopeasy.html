@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: #222;
+    color: white;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.search {
+    padding: 8px;
+}
+
+@media (max-width: 600px) {
+    .menu {
+        display: none;
+    }
+
+    .navbar::after {
+        content: "☰";
+        font-size: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar">
+    <div class="logo">ShopEasy</div>
+
+    <input class="search" type="text" placeholder="Search">
+
+    <div class="menu">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Cart</a>
+        <a href="#">Login</a>
+    </div>
+</nav>
+</body>
+</html>

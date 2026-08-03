@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#menu {
+    display: none;
+    background: #222;
+    padding: 10px;
+}
+
+#menu a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
+#menu.show {
+    display: block;
+}
+
+button {
+    padding: 10px;
+    font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<button id="menuBtn" aria-expanded="false">☰</button>
+
+<nav id="menu">
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</nav>
+
+<script>
+const button = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
+
+button.addEventListener("click", function() {
+    menu.classList.toggle("show");
+
+    const opened = menu.classList.contains("show");
+    button.setAttribute("aria-expanded", opened);
+});
+</script>
+
+</body>
+</html>
