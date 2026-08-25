@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlossomGifts - Online Flowers & Gifts</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fff7fa;
+            color: #333;
+        }
+
+        header {
+            background: #d81b60;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+        }
+
+        nav {
+            background: #880e4f;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffccdd;
+        }
+
+        .hero {
+            background: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h2 {
+            color: #d81b60;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #d81b60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ad1457;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .title {
+            text-align: center;
+            color: #d81b60;
+            margin-bottom: 25px;
+        }
+
+        /* Categories */
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            width: 220px;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .category h3 {
+            color: #d81b60;
+            margin-bottom: 10px;
+        }
+
+        .category p {
+            margin-bottom: 15px;
+        }
+
+        /* Products */
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .product {
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .product img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .product h3 {
+            color: #d81b60;
+            margin: 15px 0 8px;
+        }
+
+        .product p {
+            margin: 8px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #880e4f;
+        }
+
+        /* Forms */
+
+        .form-box {
+            background: white;
+            max-width: 500px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-box h2 {
+            text-align: center;
+            color: #d81b60;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .form-box .btn {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Shopping Cart */
+
+        .cart {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #d81b60;
+            color: white;
+        }
+
+        /* Order */
+
+        .order-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .status {
+            color: green;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #880e4f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+    <h1>🌸 BlossomGifts</h1>
+    <p>Flowers, Gifts & Happiness Delivered</p>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#products">Products</a>
+    <a href="#cart">Cart</a>
+    <a href="#orders">Orders</a>
+    <a href="#login">Login</a>
+    <a href="#contact">Contact</a>
+    <a href="#" onclick="logout()">Logout</a>
+</nav>
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+    <h2>Send Love With BlossomGifts</h2>
+
+    <p>
+        Find beautiful flowers and thoughtful gifts for every occasion.
+    </p>
+
+    <button class="btn" onclick="location.href='#products'">
+        Shop Now
+    </button>
+
+</section>
+
+<!-- CATEGORIES -->
+
+<section class="container" id="categories">
+
+    <h2 class="title">Shop by Category</h2>
+
+    <div class="categories">
+
+        <div class="category">
+            <h3>🌹 Flowers</h3>
+            <p>Roses, Lilies, Orchids and Bouquets</p>
+            <button class="btn">Browse</button>
+        </div>
+
+        <div class="category">
+            <h3>🎁 Gift Baskets</h3>
+            <p>Chocolates, Fruits and Gourmet Baskets</p>
+            <button class="btn">Browse</button>
+        </div>
+
+        <div class="category">
+            <h3>💝 Personalized Gifts</h3>
+            <p>Mugs, Frames and Customized Gifts</p>
+            <button class="btn">Browse</button>
+        </div>
+
+        <div class="category">
+            <h3>🎂 Birthday</h3>
+            <p>Special gifts for birthdays</p>
+            <button class="btn">Browse</button>
+        </div>
+
+        <div class="category">
+            <h3>💑 Anniversary</h3>
+            <p>Beautiful gifts for anniversaries</p>
+            <button class="btn">Browse</button>
+        </div>
+
+        <div class="category">
+            <h3>❤️ Valentine's Day</h3>
+            <p>Romantic flowers and gifts</p>
+            <button class="btn">Browse</button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PRODUCTS -->
+
+<section class="container" id="products">
+
+    <h2 class="title">Popular Products</h2>
+
+    <div class="products">
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946"
+                 alt="Rose Bouquet">
+
+            <h3>Red Rose Bouquet</h3>
+
+            <p>Beautiful red roses arranged in a bouquet.</p>
+
+            <p class="price">₹999</p>
+
+            <p>Available: Yes</p>
+
+            <button class="btn" onclick="addToCart('Red Rose Bouquet',999)">
+                Add to Cart
+            </button>
+
+        </div>
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9"
+                 alt="Flower Basket">
+
+            <h3>Flower Basket</h3>
+
+            <p>Fresh flowers beautifully arranged in a basket.</p>
+
+            <p class="price">₹1,499</p>
+
+            <p>Available: Yes</p>
+
+            <button class="btn" onclick="addToCart('Flower Basket',1499)">
+                Add to Cart
+            </button>
+
+        </div>
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383"
+                 alt="Gift Box">
+
+            <h3>Chocolate Gift Box</h3>
+
+            <p>Premium chocolates packed as a beautiful gift.</p>
+
+            <p class="price">₹799</p>
+
+            <p>Available: Yes</p>
+
+            <button class="btn" onclick="addToCart('Chocolate Gift Box',799)">
+                Add to Cart
+            </button>
+
+        </div>
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1515569067071-ec3b51335dd0"
+                 alt="Personalized Gift">
+
+            <h3>Personalized Gift</h3>
+
+            <p>Customized gift for your loved ones.</p>
+
+            <p class="price">₹1,199</p>
+
+            <p>Available: Yes</p>
+
+            <button class="btn" onclick="addToCart('Personalized Gift',1199)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CART -->
+
+<section class="container" id="cart">
+
+    <h2 class="title">Shopping Cart</h2>
+
+    <div class="cart">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="cartItems">
+                <tr>
+                    <td colspan="4">Your cart is empty.</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <br>
+
+        <h3>Total: ₹<span id="total">0</span></h3>
+
+        <br>
+
+        <button class="btn" onclick="checkout()">
+            Checkout
+        </button>
+
+    </div>
+
+</section>
+
+<!-- DELIVERY -->
+
+<section class="container">
+
+    <div class="form-box">
+
+        <h2>Schedule Delivery</h2>
+
+        <label>Delivery Date</label>
+        <input type="date">
+
+        <label>Delivery Time</label>
+
+        <select>
+            <option>10:00 AM - 12:00 PM</option>
+            <option>12:00 PM - 02:00 PM</option>
+            <option>02:00 PM - 04:00 PM</option>
+            <option>04:00 PM - 06:00 PM</option>
+        </select>
+
+        <label>Delivery Address</label>
+        <textarea placeholder="Enter delivery address"></textarea>
+
+        <button class="btn" onclick="scheduleDelivery()">
+            Schedule Delivery
+        </button>
+
+    </div>
+
+</section>
+
+<!-- LOGIN -->
+
+<section class="container" id="login">
+
+    <div class="form-box">
+
+        <h2>Customer Login</h2>
+
+        <form onsubmit="login(event)">
+
+            <label>Email</label>
+            <input type="email" placeholder="Enter email" required>
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter password" required>
+
+            <button class="btn" type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <br>
+
+        <p style="text-align:center;">
+            New customer? <b>Register Here</b>
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CUSTOMER INFORMATION -->
+
+<section class="container">
+
+    <div class="form-box">
+
+        <h2>Customer Information</h2>
+
+        <label>Customer Name</label>
+        <input type="text" id="customerName" placeholder="Enter name">
+
+        <label>Email</label>
+        <input type="email" id="customerEmail" placeholder="Enter email">
+
+        <label>Phone</label>
+        <input type="tel" id="customerPhone" placeholder="Enter phone">
+
+        <button class="btn" onclick="saveCustomer()">
+            Save Customer
+        </button>
+
+        <button class="btn" onclick="deleteCustomer()">
+            Delete Customer
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ORDERS -->
+
+<section class="container" id="orders">
+
+    <h2 class="title">Order Status & History</h2>
+
+    <div class="order-box">
+
+        <h3>Order #BG1001</h3>
+
+        <p>Product: Red Rose Bouquet</p>
+
+        <p>Order Date: 25-08-2026</p>
+
+        <p>Delivery Date: 28-08-2026</p>
+
+        <p>
+            Status:
+            <span class="status">Out for Delivery</span>
+        </p>
+
+    </div>
+
+    <div class="order-box">
+
+        <h3>Previous Order #BG0998</h3>
+
+        <p>Product: Chocolate Gift Box</p>
+
+        <p>Order Date: 10-08-2026</p>
+
+        <p>Status: Delivered</p>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="container" id="contact">
+
+    <div class="form-box">
+
+        <h2>Contact Us</h2>
+
+        <label>Name</label>
+        <input type="text" placeholder="Enter your name">
+
+        <label>Email</label>
+        <input type="email" placeholder="Enter your email">
+
+        <label>Message</label>
+        <textarea placeholder="Inquire about products or orders"></textarea>
+
+        <button class="btn" onclick="sendEmail()">
+            Send Inquiry
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ADMIN INVENTORY -->
+
+<section class="container">
+
+    <div class="form-box">
+
+        <h2>Inventory Management</h2>
+
+        <label>Product Name</label>
+        <input type="text" placeholder="Enter product">
+
+        <label>Quantity</label>
+        <input type="number" placeholder="Enter quantity">
+
+        <button class="btn" onclick="inventoryMessage()">
+            Update Inventory
+        </button>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <p>© 2026 BlossomGifts - Online Flowers & Gifts</p>
+    <p>Fresh Flowers • Beautiful Gifts • Timely Delivery</p>
+
+</footer>
+
+<script>
+
+    let cart = [];
+
+    function addToCart(name, price) {
+
+        cart.push({
+            name: name,
+            price: price
+        });
+
+        displayCart();
+
+        alert(name + " added to cart!");
+    }
+
+    function displayCart() {
+
+        let cartItems = document.getElementById("cartItems");
+        let total = 0;
+
+        cartItems.innerHTML = "";
+
+        if (cart.length === 0) {
+
+            cartItems.innerHTML =
+                "<tr><td colspan='4'>Your cart is empty.</td></tr>";
+
+            document.getElementById("total").innerText = "0";
+
+            return;
+        }
+
+        cart.forEach((item, index) => {
+
+            total += item.price;
+
+            cartItems.innerHTML += `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>₹${item.price}</td>
+                    <td>1</td>
+                    <td>
+                        <button class="btn"
+                        onclick="removeItem(${index})">
+                        Remove
+                        </button>
+                    </td>
+                </tr>
+            `;
+
+        });
+
+        document.getElementById("total").innerText = total;
+    }
+
+    function removeItem(index) {
+
+        cart.splice(index, 1);
+
+        displayCart();
+    }
+
+    function checkout() {
+
+        if (cart.length === 0) {
+
+            alert("Your shopping cart is empty.");
+
+        } else {
+
+            alert("Order placed successfully!");
+
+        }
+    }
+
+    function login(event) {
+
+        event.preventDefault();
+
+        alert("Login successful!");
+    }
+
+    function logout() {
+
+        alert("You have been logged out.");
+
+    }
+
+    function scheduleDelivery() {
+
+        alert("Delivery scheduled successfully!");
+
+    }
+
+    function sendEmail() {
+
+        alert("Your inquiry has been sent successfully.");
+
+    }
+
+    function saveCustomer() {
+
+        alert("Customer information saved successfully.");
+
+    }
+
+    function deleteCustomer() {
+
+        document.getElementById("customerName").value = "";
+        document.getElementById("customerEmail").value = "";
+        document.getElementById("customerPhone").value = "";
+
+        alert("Customer information deleted.");
+
+    }
+
+    function inventoryMessage() {
+
+        alert("Inventory updated successfully.");
+
+    }
+
+</script>
+
+</body>
+</html>
