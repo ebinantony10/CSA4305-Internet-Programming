@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyToll - Online Toll Payment System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #333;
+        }
+
+        header {
+            background: #1565c0;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            font-size: 34px;
+        }
+
+        nav {
+            background: #0d47a1;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffeb3b;
+        }
+
+        .hero {
+            background: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .hero h2 {
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #1565c0;
+            color: white;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #0d47a1;
+        }
+
+        .danger {
+            background: #d32f2f;
+        }
+
+        .success {
+            background: #2e7d32;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .title {
+            text-align: center;
+            color: #1565c0;
+            margin-bottom: 25px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            width: 270px;
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #1565c0;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .form-box {
+            background: white;
+            max-width: 550px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-box h2 {
+            text-align: center;
+            color: #1565c0;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #1565c0;
+            color: white;
+        }
+
+        .balance {
+            background: #e3f2fd;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .balance h2 {
+            color: #1565c0;
+        }
+
+        .balance span {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .status {
+            color: green;
+            font-weight: bold;
+        }
+
+        .qr {
+            background: white;
+            text-align: center;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        #qrcode {
+            margin: 20px auto;
+            width: 150px;
+            height: 150px;
+            border: 3px solid #1565c0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+        }
+
+        footer {
+            background: #0d47a1;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        @media(max-width: 700px) {
+
+            nav a {
+                display: block;
+                margin: 10px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+    <h1>🚗 EasyToll</h1>
+    <p>Online Toll Payment & Pass Management System</p>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#user">User</a>
+    <a href="#wallet">eWallet</a>
+    <a href="#passes">Toll Pass</a>
+    <a href="#transactions">Transactions</a>
+    <a href="#admin">Admin</a>
+    <a href="#gate">Toll Gate</a>
+    <a href="#login">Login</a>
+</nav>
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+    <h2>Pay Toll in Advance</h2>
+
+    <p>
+        Buy your toll ticket or pass online and avoid waiting in queues
+        at toll booths.
+    </p>
+
+    <button class="btn" onclick="location.href='#passes'">
+        Buy Toll Pass
+    </button>
+
+    <button class="btn" onclick="location.href='#wallet'">
+        Add Money
+    </button>
+
+</section>
+
+<!-- USER MODULE -->
+
+<section class="container" id="user">
+
+    <h2 class="title">User Module</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>👤 Register</h3>
+            <p>Create a new EasyToll account.</p>
+            <button class="btn"
+                onclick="location.href='#register'">
+                Register
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🔐 Login</h3>
+            <p>Login to your toll account.</p>
+            <button class="btn"
+                onclick="location.href='#login'">
+                Login
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🚘 Vehicle Details</h3>
+            <p>Add or update your vehicle information.</p>
+            <button class="btn"
+                onclick="location.href='#vehicle'">
+                Manage Vehicle
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🔔 Notifications</h3>
+            <p>View upcoming toll charges and reminders.</p>
+            <button class="btn"
+                onclick="showNotification()">
+                View Alerts
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- REGISTER -->
+
+<section class="container" id="register">
+
+    <div class="form-box">
+
+        <h2>User Registration</h2>
+
+        <label>Full Name</label>
+        <input type="text" id="regName"
+               placeholder="Enter full name">
+
+        <label>Email</label>
+        <input type="email" id="regEmail"
+               placeholder="Enter email">
+
+        <label>Mobile Number</label>
+        <input type="tel"
+               placeholder="Enter mobile number">
+
+        <label>Password</label>
+        <input type="password"
+               placeholder="Create password">
+
+        <button class="btn" onclick="registerUser()">
+            Register
+        </button>
+
+    </div>
+
+</section>
+
+<!-- LOGIN -->
+
+<section class="container" id="login">
+
+    <div class="form-box">
+
+        <h2>Login</h2>
+
+        <label>Email</label>
+        <input type="email"
+               placeholder="Enter email">
+
+        <label>Password</label>
+        <input type="password"
+               placeholder="Enter password">
+
+        <label>Login As</label>
+
+        <select>
+            <option>Select Role</option>
+            <option>User</option>
+            <option>Admin</option>
+            <option>Toll Gate User</option>
+        </select>
+
+        <button class="btn" onclick="loginUser()">
+            Login
+        </button>
+
+    </div>
+
+</section>
+
+<!-- WALLET -->
+
+<section class="container" id="wallet">
+
+    <h2 class="title">eWallet</h2>
+
+    <div class="balance">
+
+        <h2>Current Wallet Balance</h2>
+
+        <br>
+
+        <span>₹<span id="walletBalance">2,500</span></span>
+
+        <br><br>
+
+        <input type="number"
+               id="money"
+               placeholder="Enter amount to add">
+
+        <br><br>
+
+        <button class="btn"
+                onclick="addMoney()">
+            Add Money
+        </button>
+
+    </div>
+
+</section>
+
+<!-- VEHICLE -->
+
+<section class="container" id="vehicle">
+
+    <div class="form-box">
+
+        <h2>Vehicle Details</h2>
+
+        <label>Vehicle Number</label>
+        <input type="text"
+               id="vehicleNumber"
+               placeholder="TN 00 AB 0000">
+
+        <label>Vehicle Type</label>
+
+        <select>
+            <option>Car</option>
+            <option>Bike</option>
+            <option>Bus</option>
+            <option>Truck</option>
+        </select>
+
+        <label>Vehicle Model</label>
+        <input type="text"
+               placeholder="Enter vehicle model">
+
+        <button class="btn"
+                onclick="updateVehicle()">
+            Update Vehicle
+        </button>
+
+    </div>
+
+</section>
+
+<!-- TOLL PASSES -->
+
+<section class="container" id="passes">
+
+    <h2 class="title">Toll Pass Management</h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>🎫 Buy Toll eTicket</h3>
+
+            <p>
+                Purchase a toll ticket for your upcoming journey.
+            </p>
+
+            <button class="btn"
+                    onclick="buyTicket()">
+                Buy eTicket
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🆕 New Toll Pass</h3>
+
+            <p>
+                Apply for a new toll pass.
+            </p>
+
+            <button class="btn"
+                    onclick="applyPass()">
+                Apply
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔄 Renewal</h3>
+
+            <p>
+                Renew your existing toll pass.
+            </p>
+
+            <button class="btn"
+                    onclick="renewPass()">
+                Renew Pass
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📱 Get QR Code</h3>
+
+            <p>
+                Generate QR code for your approved toll pass.
+            </p>
+
+            <button class="btn"
+                    onclick="generateQR()">
+                Generate QR
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- QR CODE -->
+
+<section class="container">
+
+    <div class="qr">
+
+        <h2>My Toll Pass QR Code</h2>
+
+        <div id="qrcode">
+            QR
+        </div>
+
+        <p>
+            Show this QR code at the toll gate.
+        </p>
+
+        <button class="btn"
+                onclick="generateQR()">
+            Generate QR Code
+        </button>
+
+    </div>
+
+</section>
+
+<!-- TRANSACTIONS -->
+
+<section class="container" id="transactions">
+
+    <h2 class="title">Transaction History</h2>
+
+    <table>
+
+        <tr>
+            <th>Transaction ID</th>
+            <th>Date</th>
+            <th>Toll Gate</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>TXN1001</td>
+            <td>25-08-2026</td>
+            <td>Chennai Toll Gate</td>
+            <td>₹120</td>
+            <td class="status">Paid</td>
+        </tr>
+
+        <tr>
+            <td>TXN1002</td>
+            <td>24-08-2026</td>
+            <td>Vellore Toll Gate</td>
+            <td>₹90</td>
+            <td class="status">Paid</td>
+        </tr>
+
+        <tr>
+            <td>TXN1003</td>
+            <td>20-08-2026</td>
+            <td>Salem Toll Gate</td>
+            <td>₹150</td>
+            <td class="status">Paid</td>
+        </tr>
+
+    </table>
+
+</section>
+
+<!-- PAYMENT SUMMARY -->
+
+<section class="container">
+
+    <div class="balance">
+
+        <h2>Payment Summary</h2>
+
+        <p>Total Toll Payments: ₹360</p>
+        <p>Successful Payments: 3</p>
+        <p>Pending Payments: 0</p>
+
+        <button class="btn"
+                onclick="downloadSummary()">
+            View Summary
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ADMIN -->
+
+<section class="container" id="admin">
+
+    <h2 class="title">Admin Module</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🔐 Admin Login</h3>
+            <p>Secure administrator login.</p>
+            <button class="btn">Login</button>
+        </div>
+
+        <div class="card">
+            <h3>👥 Manage Users</h3>
+            <p>View and manage registered users.</p>
+            <button class="btn"
+                    onclick="adminMessage()">
+                Manage
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🎫 Manage Toll Pass</h3>
+            <p>Approve and manage user toll passes.</p>
+            <button class="btn"
+                    onclick="adminMessage()">
+                Manage Pass
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🛣️ Manage Toll</h3>
+            <p>Create and update toll gate information.</p>
+            <button class="btn"
+                    onclick="adminMessage()">
+                Manage Toll
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>✅ Approve Toll Pass</h3>
+            <p>Review and approve pending toll passes.</p>
+            <button class="btn success"
+                    onclick="approvePass()">
+                Approve
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>📲 Generate QR</h3>
+            <p>Generate QR codes for approved passes.</p>
+            <button class="btn"
+                    onclick="generateQR()">
+                Generate
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>➕ Create Toll Details</h3>
+            <p>Add new toll gate information.</p>
+            <button class="btn"
+                    onclick="createToll()">
+                Create Toll
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- TOLL GATE USER -->
+
+<section class="container" id="gate">
+
+    <h2 class="title">Toll Gate User Module</h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>🔐 Login</h3>
+
+            <p>
+                Toll gate operator login.
+            </p>
+
+            <button class="btn">
+                Login
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📷 Scan QR</h3>
+
+            <p>
+                Scan the user's toll pass QR code.
+            </p>
+
+            <button class="btn"
+                    onclick="scanQR()">
+                Scan QR
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔎 Verify Pass ID</h3>
+
+            <p>
+                Verify whether the toll pass is valid.
+            </p>
+
+            <button class="btn"
+                    onclick="verifyPass()">
+                Verify Pass
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🎫 Verify Toll Ticket</h3>
+
+            <p>
+                Check the validity of the purchased toll ticket.
+            </p>
+
+            <button class="btn"
+                    onclick="verifyTicket()">
+                Verify Ticket
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📍 Update Toll Location</h3>
+
+            <p>
+                Update the current toll gate location.
+            </p>
+
+            <button class="btn"
+                    onclick="updateLocation()">
+                Update Location
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- TOLL DETAILS -->
+
+<section class="container">
+
+    <h2 class="title">Available Toll Gates</h2>
+
+    <table>
+
+        <tr>
+            <th>Toll ID</th>
+            <th>Toll Gate</th>
+            <th>Location</th>
+            <th>Car Fee</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>T001</td>
+            <td>Chennai Toll</td>
+            <td>Chennai</td>
+            <td>₹120</td>
+            <td class="status">Active</td>
+        </tr>
+
+        <tr>
+            <td>T002</td>
+            <td>Vellore Toll</td>
+            <td>Vellore</td>
+            <td>₹90</td>
+            <td class="status">Active</td>
+        </tr>
+
+        <tr>
+            <td>T003</td>
+            <td>Salem Toll</td>
+            <td>Salem</td>
+            <td>₹150</td>
+            <td class="status">Active</td>
+        </tr>
+
+    </table>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>EasyToll</h3>
+
+    <p>
+        Pay in advance. Travel without waiting.
+    </p>
+
+    <p>
+        © 2026 EasyToll Online Toll Payment System
+    </p>
+
+</footer>
+
+<script>
+
+    let balance = 2500;
+
+    function registerUser() {
+
+        let name = document.getElementById("regName").value;
+
+        if (name === "") {
+            alert("Please enter your name.");
+        } else {
+            alert("Registration successful!");
+        }
+
+    }
+
+    function loginUser() {
+
+        alert("Login successful!");
+
+    }
+
+    function addMoney() {
+
+        let amount = Number(
+            document.getElementById("money").value
+        );
+
+        if (amount <= 0 || isNaN(amount)) {
+
+            alert("Please enter a valid amount.");
+
+            return;
+        }
+
+        balance += amount;
+
+        document.getElementById("walletBalance")
+            .innerText = balance;
+
+        alert("₹" + amount +
+              " added to your eWallet successfully.");
+
+    }
+
+    function updateVehicle() {
+
+        let vehicle =
+            document.getElementById("vehicleNumber").value;
+
+        if (vehicle === "") {
+
+            alert("Enter vehicle number.");
+
+        } else {
+
+            alert("Vehicle details updated successfully.");
+
+        }
+
+    }
+
+    function buyTicket() {
+
+        if (balance < 120) {
+
+            alert("Insufficient wallet balance.");
+
+        } else {
+
+            balance -= 120;
+
+            document.getElementById("walletBalance")
+                .innerText = balance;
+
+            alert(
+                "Toll eTicket purchased successfully!"
+            );
+
+        }
+
+    }
+
+    function applyPass() {
+
+        alert(
+            "New toll pass application submitted for approval."
+        );
+
+    }
+
+    function renewPass() {
+
+        alert(
+            "Toll pass renewal request submitted successfully."
+        );
+
+    }
+
+    function generateQR() {
+
+        document.getElementById("qrcode")
+            .innerText = "✓";
+
+        alert(
+            "QR Code generated successfully!"
+        );
+
+    }
+
+    function approvePass() {
+
+        alert(
+            "Toll pass approved successfully."
+        );
+
+    }
+
+    function createToll() {
+
+        alert(
+            "New toll gate details created successfully."
+        );
+
+    }
+
+    function scanQR() {
+
+        alert(
+            "QR Code scanned successfully."
+        );
+
+    }
+
+    function verifyPass() {
+
+        alert(
+            "Toll Pass ID verified. Pass is VALID."
+        );
+
+    }
+
+    function verifyTicket() {
+
+        alert(
+            "Toll ticket verified successfully."
+        );
+
+    }
+
+    function updateLocation() {
+
+        alert(
+            "Toll gate location updated successfully."
+        );
+
+    }
+
+    function showNotification() {
+
+        alert(
+            "Notification: Toll charge of ₹120 is scheduled for your upcoming journey."
+        );
+
+    }
+
+    function downloadSummary() {
+
+        alert(
+            "Payment summary generated successfully."
+        );
+
+    }
+
+    function adminMessage() {
+
+        alert(
+            "Admin management panel opened."
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
