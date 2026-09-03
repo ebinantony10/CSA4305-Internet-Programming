@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechSavvy - Electronics Shopping</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#222;
+}
+
+/* HEADER */
+header{
+    background:#111827;
+    color:white;
+    padding:15px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#38bdf8;
+}
+
+nav{
+    display:flex;
+    gap:18px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+nav a:hover{
+    color:#38bdf8;
+}
+
+/* HERO */
+.hero{
+    background:linear-gradient(135deg,#111827,#1e3a5f);
+    color:white;
+    text-align:center;
+    padding:70px 20px;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    max-width:750px;
+    margin:auto;
+    line-height:1.6;
+    font-size:18px;
+}
+
+.hero button{
+    margin-top:25px;
+    background:#38bdf8;
+    color:#111827;
+    font-weight:bold;
+    padding:14px 28px;
+}
+
+/* COMMON */
+section{
+    padding:55px 7%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:30px;
+    color:#111827;
+    margin-bottom:30px;
+}
+
+button{
+    border:none;
+    background:#2563eb;
+    color:white;
+    padding:10px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+/* SEARCH */
+.search-box{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.search-box input{
+    width:60%;
+    max-width:600px;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+/* CATEGORIES */
+.category-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+}
+
+.category{
+    background:white;
+    padding:25px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.category:hover{
+    transform:translateY(-6px);
+}
+
+.category h3{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+/* SUB CATEGORIES */
+.subcategories{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+}
+
+.subcategory{
+    background:#dbeafe;
+    color:#1e3a8a;
+    padding:10px 18px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.subcategory:hover{
+    background:#2563eb;
+    color:white;
+}
+
+/* PRODUCTS */
+.product-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:25px;
+}
+
+.product-card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.product-card:hover{
+    transform:translateY(-7px);
+}
+
+.product-card img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
+
+.product-info{
+    padding:18px;
+}
+
+.product-info h3{
+    margin-bottom:8px;
+}
+
+.product-info p{
+    color:#666;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.price{
+    font-size:20px;
+    color:#2563eb;
+    font-weight:bold;
+    margin:12px 0;
+}
+
+.product-buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.wishlist-btn{
+    background:#ec4899;
+}
+
+/* CART */
+.cart-box{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    max-width:900px;
+    margin:auto;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    border-bottom:1px solid #ddd;
+    gap:10px;
+}
+
+.cart-item button{
+    padding:7px 10px;
+    background:#dc2626;
+}
+
+.cart-total{
+    text-align:right;
+    font-size:20px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+/* DETAILS */
+.details-box{
+    max-width:750px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* CHECKOUT */
+.checkout{
+    background:#eaf3ff;
+}
+
+.checkout-form{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.checkout-form input,
+.checkout-form textarea,
+.checkout-form select{
+    width:100%;
+    padding:12px;
+    margin:8px 0 18px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+/* DASHBOARD */
+.dashboard{
+    max-width:850px;
+    margin:auto;
+}
+
+.dashboard-card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+}
+
+.dashboard-card h3{
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+/* ADMIN */
+.admin-section{
+    background:#111827;
+    color:white;
+}
+
+.admin-panel{
+    max-width:850px;
+    margin:auto;
+    background:white;
+    color:#222;
+    padding:30px;
+    border-radius:12px;
+}
+
+.admin-panel input,
+.admin-panel textarea{
+    width:100%;
+    padding:11px;
+    margin:8px 0 15px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+/* LOGIN */
+.login-box{
+    max-width:450px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.login-box input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+/* PROMOTION */
+.promo{
+    background:#facc15;
+    padding:18px;
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+}
+
+/* FOOTER */
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+
+    header{
+        flex-direction:column;
+        gap:12px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .search-box input{
+        width:100%;
+    }
+
+    section{
+        padding:40px 5%;
+    }
+
+    .cart-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">⚡ TechSavvy</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+        <a href="#cart">Cart 🛒</a>
+        <a href="#account">My Account</a>
+    </nav>
+</header>
+
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+    <div>
+        <h1>Discover the Latest Technology</h1>
+
+        <p>
+            Shop smartphones, laptops, tablets and accessories at the best prices.
+            Enjoy easy shopping, secure payments, exclusive discounts and order tracking.
+        </p>
+
+        <button onclick="document.getElementById('products').scrollIntoView()">
+            Shop Now
+        </button>
+    </div>
+</section>
+
+
+<div class="promo">
+    🔥 Exclusive Online Offer: Get up to 20% OFF on Selected Gadgets!
+</div>
+
+
+<!-- SEARCH -->
+
+<section>
+
+<h2 class="section-title">Search for Electronics</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput"
+           placeholder="Search smartphones, laptops, tablets..."
+           onkeyup="searchProducts()">
+
+    <button onclick="searchProducts()">Search</button>
+</div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section id="categories">
+
+<h2 class="section-title">Popular Categories</h2>
+
+<div class="category-container">
+
+<div class="category" onclick="filterCategory('Smartphones')">
+    <h3>📱 Smartphones</h3>
+    <p>Latest Android and premium phones.</p>
+</div>
+
+<div class="category" onclick="filterCategory('Laptops')">
+    <h3>💻 Laptops</h3>
+    <p>Powerful laptops for work and study.</p>
+</div>
+
+<div class="category" onclick="filterCategory('Tablets')">
+    <h3>📲 Tablets</h3>
+    <p>Entertainment and productivity devices.</p>
+</div>
+
+<div class="category" onclick="filterCategory('Accessories')">
+    <h3>🎧 Accessories</h3>
+    <p>Headphones, chargers and gadgets.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SUBCATEGORIES -->
+
+<section>
+
+<h2 class="section-title">Shop by Subcategory</h2>
+
+<div class="subcategories">
+
+<div class="subcategory" onclick="searchSubCategory('Android')">Android Phones</div>
+<div class="subcategory" onclick="searchSubCategory('Gaming')">Gaming Laptops</div>
+<div class="subcategory" onclick="searchSubCategory('Smartwatch')">Smart Watches</div>
+<div class="subcategory" onclick="searchSubCategory('Headphones')">Headphones</div>
+<div class="subcategory" onclick="searchSubCategory('Chargers')">Chargers</div>
+<div class="subcategory" onclick="searchSubCategory('Tablets')">Tablets</div>
+
+</div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section id="products">
+
+<h2 class="section-title">Featured Products</h2>
+
+<div class="product-container" id="productContainer">
+
+<div class="product-card" data-category="Smartphones">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80">
+
+<div class="product-info">
+<h3>Smartphone Pro X</h3>
+<p>Powerful smartphone with high-quality camera and fast processor.</p>
+<p>⭐⭐⭐⭐⭐ (120 Reviews)</p>
+<div class="price">₹49,999</div>
+
+<div class="product-buttons">
+<button onclick="showDetails('Smartphone Pro X','Smartphones','High performance smartphone with premium camera, fast processor and long battery life.','₹49,999')">
+Details
+</button>
+
+<button onclick="addToCart('Smartphone Pro X',49999)">
+Add to Cart
+</button>
+
+<button class="wishlist-btn" onclick="addWishlist('Smartphone Pro X')">
+♡
+</button>
+</div>
+</div>
+</div>
+
+
+<div class="product-card" data-category="Laptops">
+<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80">
+
+<div class="product-info">
+<h3>TechBook Laptop</h3>
+<p>Fast and lightweight laptop for programming and professional work.</p>
+<p>⭐⭐⭐⭐⭐ (98 Reviews)</p>
+<div class="price">₹65,999</div>
+
+<div class="product-buttons">
+<button onclick="showDetails('TechBook Laptop','Laptops','Powerful laptop with fast processor, large storage and high-resolution display.','₹65,999')">
+Details
+</button>
+
+<button onclick="addToCart('TechBook Laptop',65999)">
+Add to Cart
+</button>
+
+<button class="wishlist-btn" onclick="addWishlist('TechBook Laptop')">
+♡
+</button>
+</div>
+</div>
+</div>
+
+
+<div class="product-card" data-category="Tablets">
+<img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80">
+
+<div class="product-info">
+<h3>SmartTab 12</h3>
+<p>Large screen tablet for entertainment, study and productivity.</p>
+<p>⭐⭐⭐⭐ (75 Reviews)</p>
+<div class="price">₹29,999</div>
+
+<div class="product-buttons">
+<button onclick="showDetails('SmartTab 12','Tablets','Lightweight tablet with high-resolution display and long battery life.','₹29,999')">
+Details
+</button>
+
+<button onclick="addToCart('SmartTab 12',29999)">
+Add to Cart
+</button>
+
+<button class="wishlist-btn" onclick="addWishlist('SmartTab 12')">
+♡
+</button>
+</div>
+</div>
+</div>
+
+
+<div class="product-card" data-category="Accessories">
+<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80">
+
+<div class="product-info">
+<h3>Wireless Headphones</h3>
+<p>Premium sound quality with comfortable wireless design.</p>
+<p>⭐⭐⭐⭐⭐ (200 Reviews)</p>
+<div class="price">₹4,999</div>
+
+<div class="product-buttons">
+<button onclick="showDetails('Wireless Headphones','Accessories','Wireless headphones with excellent sound quality and long battery life.','₹4,999')">
+Details
+</button>
+
+<button onclick="addToCart('Wireless Headphones',4999)">
+Add to Cart
+</button>
+
+<button class="wishlist-btn" onclick="addWishlist('Wireless Headphones')">
+♡
+</button>
+</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PRODUCT DETAILS -->
+
+<section>
+
+<h2 class="section-title">Product Details</h2>
+
+<div class="details-box" id="detailsBox">
+
+<p>Select a product and click <b>Details</b> to view complete information.</p>
+
+</div>
+
+</section>
+
+
+<!-- CART -->
+
+<section id="cart">
+
+<h2 class="section-title">Shopping Cart</h2>
+
+<div class="cart-box">
+
+<div id="cartItems">
+    Your shopping cart is empty.
+</div>
+
+<div class="cart-total">
+    Total: ₹<span id="total">0</span>
+</div>
+
+<button onclick="document.getElementById('checkout').scrollIntoView()">
+    Proceed to Checkout
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CHECKOUT -->
+
+<section class="checkout" id="checkout">
+
+<h2 class="section-title">Checkout</h2>
+
+<div class="checkout-form">
+
+<form onsubmit="checkout(event)">
+
+<label>Customer Name</label>
+<input type="text" id="customerName" required placeholder="Enter your name">
+
+<label>Email Address</label>
+<input type="email" id="customerEmail" required placeholder="Enter email">
+
+<label>Phone Number</label>
+<input type="tel" required placeholder="Enter phone number">
+
+<label>Delivery Address</label>
+<textarea required placeholder="Enter your complete delivery address"></textarea>
+
+<label>Payment Method</label>
+
+<select id="payment">
+<option>UPI</option>
+<option>Credit Card</option>
+<option>Debit Card</option>
+<option>Net Banking</option>
+<option>Cash on Delivery</option>
+</select>
+
+<button type="submit">Place Order</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- ACCOUNT -->
+
+<section id="account">
+
+<h2 class="section-title">My Account</h2>
+
+<div class="dashboard">
+
+<div class="dashboard-card">
+
+<h3>📦 Order Status</h3>
+
+<div id="orderStatus">
+No recent orders.
+</div>
+
+</div>
+
+
+<div class="dashboard-card">
+
+<h3>🕒 Order History</h3>
+
+<p>Smartphone Pro X - Delivered</p>
+<p>Wireless Headphones - Delivered</p>
+
+</div>
+
+
+<div class="dashboard-card">
+
+<h3>♡ My Wishlist</h3>
+
+<div id="wishlist">
+Your wishlist is empty.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LOGIN -->
+
+<section>
+
+<h2 class="section-title">User Login</h2>
+
+<div class="login-box">
+
+<input type="email" placeholder="Email Address">
+
+<input type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<button onclick="registerUser()">Register</button>
+
+<button style="background:#555;" onclick="logout()">Logout</button>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN PANEL -->
+
+<section class="admin-section">
+
+<h2 class="section-title" style="color:white;">Admin Product Management</h2>
+
+<div class="admin-panel">
+
+<h3 style="margin-bottom:20px;">Add / Modify Product</h3>
+
+<label>Product Name</label>
+<input type="text" id="adminProductName" placeholder="Enter product name">
+
+<label>Product Price</label>
+<input type="number" id="adminProductPrice" placeholder="Enter price">
+
+<label>Product Description</label>
+<textarea id="adminProductDescription"
+placeholder="Enter product description"></textarea>
+
+<button onclick="addProduct()">Add Product</button>
+
+<button onclick="updateProduct()">Update Product</button>
+
+<button style="background:#dc2626;" onclick="removeProduct()">
+Remove Product
+</button>
+
+<div style="margin-top:25px;">
+
+<h3>Customer Checkout Information</h3>
+
+<div id="customerInfo">
+No customer checkout information available.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<p>© 2026 TechSavvy - Online Electronics Shopping Platform</p>
+
+<p>
+Smartphones • Laptops • Tablets • Accessories • Secure Shopping
+</p>
+
+</footer>
+
+
+<script>
+
+let cart = [];
+let wishlist = [];
+let total = 0;
+
+
+/* ADD TO CART */
+
+function addToCart(name, price){
+
+    let existingItem = cart.find(item => item.name === name);
+
+    if(existingItem){
+        existingItem.quantity++;
+    }
+    else{
+        cart.push({
+            name:name,
+            price:price,
+            quantity:1
+        });
+    }
+
+    total += price;
+
+    displayCart();
+
+    alert(name + " added to your shopping cart!");
+}
+
+
+/* DISPLAY CART */
+
+function displayCart(){
+
+    let cartItems = document.getElementById("cartItems");
+
+    if(cart.length === 0){
+        cartItems.innerHTML = "Your shopping cart is empty.";
+        document.getElementById("total").innerText = 0;
+        return;
+    }
+
+    cartItems.innerHTML = "";
+
+    cart.forEach(function(item,index){
+
+        cartItems.innerHTML += `
+
+        <div class="cart-item">
+
+            <div>
+                <b>${item.name}</b><br>
+                Price: ₹${item.price}<br>
+                Quantity: ${item.quantity}
+            </div>
+
+            <div>
+
+                <button onclick="increaseQuantity(${index})">+</button>
+
+                <button onclick="decreaseQuantity(${index})">-</button>
+
+                <button onclick="removeFromCart(${index})">
+                Remove
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+    document.getElementById("total").innerText = total.toLocaleString();
+}
+
+
+/* EDIT QUANTITY */
+
+function increaseQuantity(index){
+
+    cart[index].quantity++;
+
+    total += cart[index].price;
+
+    displayCart();
+}
+
+
+function decreaseQuantity(index){
+
+    if(cart[index].quantity > 1){
+
+        cart[index].quantity--;
+
+        total -= cart[index].price;
+
+    }
+    else{
+        removeFromCart(index);
+        return;
+    }
+
+    displayCart();
+}
+
+
+/* REMOVE */
+
+function removeFromCart(index){
+
+    total -= cart[index].price * cart[index].quantity;
+
+    cart.splice(index,1);
+
+    displayCart();
+}
+
+
+/* WISHLIST */
+
+function addWishlist(product){
+
+    if(!wishlist.includes(product)){
+
+        wishlist.push(product);
+
+        alert(product + " added to wishlist!");
+
+    }
+
+    displayWishlist();
+}
+
+
+function displayWishlist(){
+
+    let wishlistBox = document.getElementById("wishlist");
+
+    if(wishlist.length === 0){
+        wishlistBox.innerHTML = "Your wishlist is empty.";
+        return;
+    }
+
+    wishlistBox.innerHTML = wishlist.map(item =>
+        "<p>♡ " + item + "</p>"
+    ).join("");
+}
+
+
+/* PRODUCT DETAILS */
+
+function showDetails(name,category,description,price){
+
+    document.getElementById("detailsBox").innerHTML = `
+
+        <h2>${name}</h2>
+
+        <p><b>Category:</b> ${category}</p>
+
+        <p style="margin:15px 0;">
+        ${description}
+        </p>
+
+        <h3 style="color:#2563eb;">
+        Price: ${price}
+        </h3>
+
+        <p style="margin-top:10px;">
+        ⭐⭐⭐⭐⭐ Customer Reviews Available
+        </p>
+
+    `;
+
+    document.getElementById("detailsBox").scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+
+/* SEARCH */
+
+function searchProducts(){
+
+    let input = document.getElementById("searchInput").value.toLowerCase();
+
+    let products = document.querySelectorAll(".product-card");
+
+    products.forEach(function(product){
+
+        let productText = product.innerText.toLowerCase();
+
+        if(productText.includes(input)){
+            product.style.display = "block";
+        }
+        else{
+            product.style.display = "none";
+        }
+
+    });
+
+}
+
+
+/* CATEGORY FILTER */
+
+function filterCategory(category){
+
+    let products = document.querySelectorAll(".product-card");
+
+    products.forEach(function(product){
+
+        if(product.dataset.category === category){
+            product.style.display = "block";
+        }
+        else{
+            product.style.display = "none";
+        }
+
+    });
+
+    document.getElementById("products").scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* SUBCATEGORY SEARCH */
+
+function searchSubCategory(subCategory){
+
+    document.getElementById("searchInput").value = subCategory;
+
+    searchProducts();
+
+    document.getElementById("products").scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+
+/* CHECKOUT */
+
+function checkout(event){
+
+    event.preventDefault();
+
+    if(cart.length === 0){
+
+        alert("Your cart is empty!");
+
+        return;
+    }
+
+    let customerName =
+        document.getElementById("customerName").value;
+
+    let customerEmail =
+        document.getElementById("customerEmail").value;
+
+    let payment =
+        document.getElementById("payment").value;
+
+
+    document.getElementById("orderStatus").innerHTML = `
+
+        <p><b>Order Confirmed</b> 🎉</p>
+
+        <p>Status: Processing</p>
+
+        <p>Your products will be packed and shipped soon.</p>
+
+    `;
+
+
+    document.getElementById("customerInfo").innerHTML = `
+
+        <p><b>Customer Name:</b> ${customerName}</p>
+
+        <p><b>Email:</b> ${customerEmail}</p>
+
+        <p><b>Payment Method:</b> ${payment}</p>
+
+        <p><b>Order Amount:</b> ₹${total.toLocaleString()}</p>
+
+    `;
+
+
+    alert(
+
+        "Order Placed Successfully! 🎉\n\n" +
+
+        "Customer: " + customerName +
+
+        "\nPayment: " + payment +
+
+        "\nTotal Amount: ₹" + total.toLocaleString() +
+
+        "\n\nOrder confirmation has been generated."
+
+    );
+
+
+    cart = [];
+
+    total = 0;
+
+    displayCart();
+
+    document.querySelector(".checkout-form form").reset();
+
+}
+
+
+/* LOGIN */
+
+function login(){
+
+    alert(
+        "Login successful! User authentication can be connected to a database."
+    );
+
+}
+
+
+function registerUser(){
+
+    alert(
+        "Registration successful! A complete system would store user information securely in a database."
+    );
+
+}
+
+
+function logout(){
+
+    alert("You have been logged out successfully.");
+
+}
+
+
+/* ADMIN FUNCTIONS */
+
+function addProduct(){
+
+    let name =
+        document.getElementById("adminProductName").value;
+
+    let price =
+        document.getElementById("adminProductPrice").value;
+
+    let description =
+        document.getElementById("adminProductDescription").value;
+
+
+    if(name === "" || price === ""){
+
+        alert("Please enter product name and price.");
+
+        return;
+    }
+
+
+    alert(
+        "Product Added Successfully!\n\n" +
+        "Name: " + name +
+        "\nPrice: ₹" + price +
+        "\nDescription: " + description
+    );
+
+}
+
+
+function updateProduct(){
+
+    alert(
+        "Product details, price and description have been updated."
+    );
+
+}
+
+
+function removeProduct(){
+
+    alert(
+        "Selected product has been removed from the product catalogue."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
