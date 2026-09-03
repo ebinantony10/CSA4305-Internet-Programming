@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy a Cake - Online Cake Ordering System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fff5f7;
+            color: #333;
+        }
+
+        /* HEADER */
+        header {
+            background: #d6336c;
+            color: white;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #ffe0ea;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(rgba(214, 51, 108, 0.8), rgba(214, 51, 108, 0.7)),
+                url("https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        .hero button {
+            margin-top: 25px;
+            padding: 14px 30px;
+            border: none;
+            background: white;
+            color: #d6336c;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .hero button:hover {
+            transform: scale(1.05);
+        }
+
+        /* SECTION */
+        section {
+            padding: 60px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 32px;
+            color: #d6336c;
+        }
+
+        /* CATEGORY */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-8px);
+        }
+
+        .category h3 {
+            color: #d6336c;
+            margin-bottom: 10px;
+        }
+
+        /* CAKES */
+        .cake-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .cake-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+            transition: 0.3s;
+        }
+
+        .cake-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .cake-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .cake-info {
+            padding: 20px;
+        }
+
+        .cake-info h3 {
+            margin-bottom: 10px;
+            color: #d6336c;
+        }
+
+        .cake-info p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: #d6336c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #a61e4d;
+        }
+
+        /* CART */
+        .cart {
+            background: white;
+            margin: 30px 8%;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .cart h2 {
+            color: #d6336c;
+            margin-bottom: 20px;
+        }
+
+        #cartItems {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* ORDER FORM */
+        .order-section {
+            background: #ffe8ef;
+        }
+
+        .order-form {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .order-form input,
+        .order-form select,
+        .order-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .order-form textarea {
+            resize: vertical;
+        }
+
+        /* FEATURES */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .feature {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .feature h3 {
+            color: #d6336c;
+            margin-bottom: 10px;
+        }
+
+        /* LOGIN */
+        .login-box {
+            max-width: 450px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            section {
+                padding: 40px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🎂 Buy a Cake</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#cakes">Cakes</a>
+        <a href="#order">Order</a>
+        <a href="#login">Login</a>
+    </nav>
+</header>
+
+
+<!-- HOME -->
+<section class="hero" id="home">
+    <div>
+        <h1>Fresh Cakes Delivered With Love ❤️</h1>
+
+        <p>
+            Browse delicious cakes by category, flavor and occasion.
+            Customize your cake, place your order and get it delivered
+            safely to your doorstep.
+        </p>
+
+        <button onclick="document.getElementById('cakes').scrollIntoView()">
+            Explore Cakes
+        </button>
+    </div>
+</section>
+
+
+<!-- CATEGORIES -->
+<section>
+    <h2 class="section-title">Shop by Category</h2>
+
+    <div class="categories">
+        <div class="category">
+            <h3>🎂 Birthday Cakes</h3>
+            <p>Make birthdays sweeter.</p>
+        </div>
+
+        <div class="category">
+            <h3>❤️ Anniversary</h3>
+            <p>Celebrate love together.</p>
+        </div>
+
+        <div class="category">
+            <h3>🎉 Special Events</h3>
+            <p>Perfect for every occasion.</p>
+        </div>
+
+        <div class="category">
+            <h3>🍫 Chocolate Cakes</h3>
+            <p>For chocolate lovers.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- CAKES -->
+<section id="cakes">
+    <h2 class="section-title">Popular Cakes</h2>
+
+    <div class="cake-container">
+
+        <div class="cake-card">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80">
+
+            <div class="cake-info">
+                <h3>Chocolate Delight</h3>
+                <p>Rich chocolate cake with creamy chocolate frosting.</p>
+                <div class="price">₹599</div>
+
+                <button onclick="addToCart('Chocolate Delight', 599)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+
+        <div class="cake-card">
+            <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80">
+
+            <div class="cake-info">
+                <h3>Red Velvet Cake</h3>
+                <p>Soft and delicious red velvet cake with cream cheese.</p>
+                <div class="price">₹699</div>
+
+                <button onclick="addToCart('Red Velvet Cake', 699)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+
+        <div class="cake-card">
+            <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=800&q=80">
+
+            <div class="cake-info">
+                <h3>Strawberry Cake</h3>
+                <p>Fresh strawberry flavored cake with creamy topping.</p>
+                <div class="price">₹649</div>
+
+                <button onclick="addToCart('Strawberry Cake', 649)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+
+        <div class="cake-card">
+            <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=800&q=80">
+
+            <div class="cake-info">
+                <h3>Black Forest Cake</h3>
+                <p>Classic black forest cake with cherries and chocolate.</p>
+                <div class="price">₹749</div>
+
+                <button onclick="addToCart('Black Forest Cake', 749)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CART -->
+<div class="cart">
+    <h2>🛒 Your Cart</h2>
+
+    <div id="cartItems">
+        Your cart is empty.
+    </div>
+
+    <h3>Total: ₹<span id="total">0</span></h3>
+</div>
+
+
+<!-- ORDER -->
+<section class="order-section" id="order">
+
+    <h2 class="section-title">Customize & Place Your Order</h2>
+
+    <div class="order-form">
+
+        <form onsubmit="placeOrder(event)">
+
+            <label>Customer Name</label>
+            <input type="text" id="name" required placeholder="Enter your name">
+
+            <label>Phone Number</label>
+            <input type="tel" required placeholder="Enter your phone number">
+
+            <label>Cake Size</label>
+            <select id="size">
+                <option>Half Kg</option>
+                <option>1 Kg</option>
+                <option>2 Kg</option>
+                <option>3 Kg</option>
+            </select>
+
+            <label>Custom Message on Cake</label>
+            <input type="text" id="message" placeholder="Example: Happy Birthday Rahul">
+
+            <label>Delivery Address</label>
+            <textarea required placeholder="Enter delivery address"></textarea>
+
+            <label>Payment Method</label>
+            <select id="payment">
+                <option>UPI</option>
+                <option>Credit Card</option>
+                <option>Debit Card</option>
+                <option>Cash on Delivery</option>
+            </select>
+
+            <button type="submit">Place Order Securely</button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section>
+
+    <h2 class="section-title">Why Choose Buy a Cake?</h2>
+
+    <div class="features">
+
+        <div class="feature">
+            <h3>🚚 Fast Delivery</h3>
+            <p>Track your cake delivery easily and receive timely updates.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🎨 Custom Cakes</h3>
+            <p>Choose cake size, flavor and add your personal message.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🔒 Secure Payment</h3>
+            <p>Safe and secure payment options for every customer.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🏪 Local Sellers</h3>
+            <p>Supporting local and rural cake makers to reach more customers.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LOGIN -->
+<section id="login">
+
+    <h2 class="section-title">User Login</h2>
+
+    <div class="login-box">
+
+        <input type="email" placeholder="Enter Email">
+
+        <input type="password" placeholder="Enter Password">
+
+        <button onclick="login()">Login</button>
+
+        <p style="margin-top:15px;">
+            New user? Registration can be integrated with the customer database.
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+    <p>© 2026 Buy a Cake | Online Cake Ordering System</p>
+    <p>Fresh Cakes • Local Sellers • Easy Ordering • Secure Payment</p>
+</footer>
+
+
+<script>
+
+    let cart = [];
+    let total = 0;
+
+
+    function addToCart(cakeName, price) {
+
+        cart.push({
+            name: cakeName,
+            price: price
+        });
+
+        total += price;
+
+        displayCart();
+
+        alert(cakeName + " added to cart!");
+    }
+
+
+    function displayCart() {
+
+        let cartItems = document.getElementById("cartItems");
+
+        cartItems.innerHTML = "";
+
+        if (cart.length === 0) {
+            cartItems.innerHTML = "Your cart is empty.";
+        }
+
+        cart.forEach(function(item, index) {
+
+            cartItems.innerHTML +=
+                `<div class="cart-item">
+                    <span>${item.name}</span>
+                    <span>₹${item.price}</span>
+                 </div>`;
+        });
+
+        document.getElementById("total").innerText = total;
+    }
+
+
+    function placeOrder(event) {
+
+        event.preventDefault();
+
+        let customerName = document.getElementById("name").value;
+        let size = document.getElementById("size").value;
+        let message = document.getElementById("message").value;
+        let payment = document.getElementById("payment").value;
+
+
+        if (cart.length === 0) {
+
+            alert("Please add at least one cake to your cart!");
+
+            return;
+        }
+
+
+        alert(
+            "Order Confirmed! 🎉\n\n" +
+            "Customer: " + customerName +
+            "\nCake Size: " + size +
+            "\nMessage: " + message +
+            "\nPayment: " + payment +
+            "\nTotal Amount: ₹" + total +
+            "\n\nThank you for ordering from Buy a Cake!"
+        );
+
+
+        cart = [];
+        total = 0;
+
+        displayCart();
+
+        document.querySelector("form").reset();
+    }
+
+
+    function login() {
+
+        alert("Login functionality can be connected to a database using PHP, JSP, Node.js or other backend technology.");
+
+    }
+
+</script>
+
+</body>
+</html>
