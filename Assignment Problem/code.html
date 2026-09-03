@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Skill Development Management System</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 240px;
+    background: #172033;
+    color: white;
+    padding: 25px 15px;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.logo h2 {
+    font-size: 22px;
+}
+
+.logo p {
+    font-size: 12px;
+    margin-top: 6px;
+    color: #b8c2d1;
+}
+
+.sidebar button {
+    width: 100%;
+    background: transparent;
+    color: #dbe4f0;
+    border: none;
+    text-align: left;
+    padding: 13px 15px;
+    margin-bottom: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+    background: #2563eb;
+    color: white;
+}
+
+/* MAIN CONTENT */
+
+.main {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    padding: 30px;
+}
+
+/* HEADER */
+
+.header {
+    background: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+.header h1 {
+    font-size: 26px;
+}
+
+.header p {
+    color: #6b7280;
+    margin-top: 5px;
+}
+
+.user-box {
+    text-align: right;
+}
+
+.user-box strong {
+    display: block;
+}
+
+.user-box span {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* DASHBOARD CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    border-left: 5px solid #2563eb;
+}
+
+.card h3 {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.card p {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 12px;
+    color: #1e293b;
+}
+
+/* SECTION */
+
+.section {
+    display: none;
+}
+
+.section.active-section {
+    display: block;
+}
+
+.panel {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+.panel h2 {
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.panel h3 {
+    margin-bottom: 15px;
+}
+
+/* FORM */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 7px;
+}
+
+.btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.btn:hover {
+    background: #1d4ed8;
+}
+
+.btn-danger {
+    background: #dc2626;
+    margin-top: 0;
+    padding: 7px 10px;
+    font-size: 12px;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+/* TABLE */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #eff6ff;
+}
+
+th,
+td {
+    padding: 13px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+tr:hover {
+    background: #f9fafb;
+}
+
+/* PROGRESS */
+
+.progress-container {
+    width: 100%;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 12px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #2563eb;
+    width: 0%;
+    transition: width 0.5s;
+}
+
+/* BADGES */
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* RECOMMENDATIONS */
+
+.recommendation {
+    padding: 18px;
+    border-left: 5px solid #2563eb;
+    background: #eff6ff;
+    border-radius: 7px;
+    margin-bottom: 15px;
+}
+
+.recommendation h3 {
+    margin-bottom: 8px;
+}
+
+/* NOTIFICATION */
+
+.notification {
+    padding: 15px;
+    background: #fef3c7;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border-left: 5px solid #f59e0b;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+    padding: 15px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 800px) {
+
+    body {
+        display: block;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .header {
+        display: block;
+    }
+
+    .user-box {
+        text-align: left;
+        margin-top: 15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+```
+<div class="logo">
+    <h2>🎓 SSDMS</h2>
+    <p>Skill Development System</p>
+</div>
+
+<button class="active" onclick="showSection('dashboard', this)">
+    📊 Dashboard
+</button>
+
+<button onclick="showSection('profile', this)">
+    👤 My Profile
+</button>
+
+<button onclick="showSection('skills', this)">
+    💻 My Skills
+</button>
+
+<button onclick="showSection('assessment', this)">
+    📝 Assessment
+</button>
+
+<button onclick="showSection('certifications', this)">
+    🏆 Certifications
+</button>
+
+<button onclick="showSection('projects', this)">
+    📁 Projects
+</button>
+
+<button onclick="showSection('recommendations', this)">
+    📚 Recommendations
+</button>
+
+<button onclick="showSection('goals', this)">
+    🎯 Goals
+</button>
+
+<button onclick="showSection('notifications', this)">
+    🔔 Notifications
+</button>
+
+<button onclick="showSection('mentor', this)">
+    👨‍🏫 Mentor Feedback
+</button>
+```
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+<!-- ================= DASHBOARD ================= -->
+
+<div id="dashboard" class="section active-section">
+
+```
+<div class="header">
+
+    <div>
+        <h1>Student Dashboard</h1>
+        <p>Monitor your skills and learning progress.</p>
+    </div>
+
+    <div class="user-box">
+        <strong id="studentNameDisplay">Student</strong>
+        <span>CSE - Data Science</span>
+    </div>
+
+</div>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>Total Skills</h3>
+        <p id="totalSkills">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Average Progress</h3>
+        <p id="averageProgress">0%</p>
+    </div>
+
+    <div class="card">
+        <h3>Certifications</h3>
+        <p id="totalCertificates">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Projects</h3>
+        <p id="totalProjects">0</p>
+    </div>
+
+</div>
+
+
+<div class="panel">
+
+    <h2>Overall Skill Development Progress</h2>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="overallProgressBar"></div>
+    </div>
+
+    <br>
+
+    <strong id="overallProgressText">
+        Add skills to calculate your progress.
+    </strong>
+
+</div>
+
+
+<div class="panel">
+
+    <h2>Quick Summary</h2>
+
+    <p>
+        This Student Skill Development Management System helps
+        students record skills, assess proficiency, identify
+        competency gaps, track projects and certifications,
+        and receive learning recommendations.
+    </p>
+
+</div>
+```
+
+</div>
+
+<!-- ================= PROFILE ================= -->
+
+<div id="profile" class="section">
+
+```
+<div class="header">
+    <div>
+        <h1>My Profile</h1>
+        <p>Manage your student information.</p>
+    </div>
+</div>
+
+<div class="panel">
+
+    <h2>Student Profile</h2>
+
+    <div class="form-grid">
+
+        <div>
+            <label>Full Name</label>
+            <input type="text" id="profileName"
+                   placeholder="Enter your name">
+        </div>
+
+        <div>
+            <label>Email</label>
+            <input type="email" id="profileEmail"
+                   placeholder="Enter your email">
+        </div>
+
+        <div>
+            <label>Department</label>
+            <input type="text" id="profileDepartment"
+                   value="CSE - Data Science">
+        </div>
+
+        <div>
+            <label>Year</label>
+            <select id="profileYear">
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option selected>4th Year</option>
+            </select>
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="saveProfile()">
+        Save Profile
+    </button>
+
+</div>
+```
+
+</div>
+
+<!-- ================= SKILLS ================= -->
+
+<div id="skills" class="section">
+
+```
+<div class="header">
+    <div>
+        <h1>My Skills</h1>
+        <p>Add skills and identify competency gaps.</p>
+    </div>
+</div>
+
+
+<div class="panel">
+
+    <h2>Add New Skill</h2>
+
+    <div class="form-grid">
+
+        <div>
+            <label>Skill Name</label>
+            <input type="text" id="skillName"
+                   placeholder="Example: Python">
+        </div>
+
+        <div>
+            <label>Skill Category</label>
+            <select id="skillCategory">
+                <option>Programming</option>
+                <option>Web Development</option>
+                <option>Database</option>
+                <option>Data Science</option>
+                <option>Communication</option>
+                <option>Soft Skill</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Current Level</label>
+            <select id="currentLevel">
+                <option value="1">1 - Beginner</option>
+                <option value="2">2 - Basic</option>
+                <option value="3">3 - Intermediate</option>
+                <option value="4">4 - Advanced</option>
+                <option value="5">5 - Expert</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Target Level</label>
+            <select id="targetLevel">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" selected>5</option>
+            </select>
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="addSkill()">
+        Add Skill
+    </button>
+
+</div>
+
+
+<div class="panel">
+
+    <h2>Skill Profile</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Skill</th>
+                    <th>Category</th>
+                    <th>Current</th>
+                    <th>Target</th>
+                    <th>Gap</th>
+                    <th>Progress</th>
+                    <th>Recommendation</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="skillTableBody">
+
+                <tr>
+                    <td colspan="8">
+                        No skills added yet.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ================= ASSESSMENT ================= -->
+
+<div id="assessment" class="section">
+
+```
+<div class="header">
+    <div>
+        <h1>Skill Assessment</h1>
+        <p>Record your assessment results.</p>
+    </div>
+</div>
+
+
+<div class="panel">
+
+    <h2>Add Assessment Result</h2>
+
+    <div class="form-grid">
+
+        <div>
+            <label>Skill Name</label>
+            <input type="text" id="assessmentSkill"
+                   placeholder="Example: Python">
+        </div>
+
+        <div>
+            <label>Score (Out of 100)</label>
+            <input type="number" id="assessmentScore"
+                   min="0" max="100">
+        </div>
+
+        <div>
+            <label>Assessment Date</label>
+            <input type="date" id="assessmentDate">
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="addAssessment()">
+        Save Assessment
+    </button>
+
+</div>
+
+
+<div class="panel">
+
+    <h2>Assessment History</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Skill</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                    <th>Performance</th>
+                </tr>
+            </thead>
+
+            <tbody id="assessmentTableBody">
+
+                <tr>
+                    <td colspan="4">
+                        No assessment records available.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ================= CERTIFICATIONS ================= -->
+
+<div id="certifications" class="section">
+
+```
+<div class="header">
+    <div>
+        <h1>Certifications</h1>
+        <p>Track your completed certifications.</p>
+    </div>
+</div>
+
+
+<div class="panel">
+
+    <h2>Add Certification</h2>
+
+    <div class="form-grid">
+
+        <div>
+            <label>Certification Name</label>
+            <input type="text" id="certificateName">
+        </div>
+
+        <div>
+            <label>Organization</label>
+            <input type="text" id="certificateOrganization">
+        </div>
+
+        <div>
+            <label>Completion Date</label>
+            <input type="date" id="certificateDate">
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="addCertificate()">
+        Add Certification
+    </button>
+
+</div>
+
+
+<div class="panel">
+
+    <h2>Certification Records</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Certification</th>
+                    <th>Organization</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="certificateTableBody">
+
+                <tr>
+                    <td colspan="4">
+                        No certifications added.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ================= PROJECTS ================= -->
+
+<div id="projects" class="section">
+
+```
+<div class="header">
+    <div>
+        <h1>Projects</h1>
+        <p>Track your academic and technical projects.</p>
+    </div>
+</div>
+
+
+<div class="panel">
+
+    <h2>Add Project</h2>
+
+    <div class="form-grid">
+
+        <div>
+            <label>Project Title</label>
+            <input type="text" id="projectName">
+        </div>
+
+        <div>
+            <label>Technologies Used</label>
+            <input type="text" id="projectTechnology"
+                   placeholder="HTML, CSS, JavaScript">
+        </div>
+
+        <div>
+            <label>Status</label>
+
+            <select id="projectStatus">
+                <option>Planning</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+            </select>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <label>Project Description</label>
+
+    <textarea id="projectDescription"
+              placeholder="Enter project description"></textarea>
+
+    <button class="btn" onclick="addProject()">
+        Add Project
+    </button>
+
+</div>
+
+
+<div class="panel">
+
+    <h2>Project Records</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Technologies</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="projectTableBody">
+
+                <tr>
+                    <td colspan="5">
+                        No projects added.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ================= RECOMMENDATIONS ================= -->
+
+<div id="recommendations" class="section">
+
+```
+<div class="header">
+    <div>
+        <h1>Learning Recommendations</h1>
+        <p>Recommendations based on your current skill levels.</p>
+    </div>
+</div>
+
+
+<div class="panel">
+
+    <h2>Recommended Learning Activities</h2>
+
+    <div id="recommendationList">
+
+        <p>
+            Add skills to receive personalized learning
+            recommendations.
+        </p>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ================= GOALS ================= -->
+
+<div id="goals" class="section">
+
+```
+<div class="header">
+    <div>
+        <h1>Learning Goals</h1>
+        <p>Set and track your development goals.</p>
+    </div>
+</div>
+
+
+<div class="panel">
+
+    <h2>Add New Goal</h2>
+
+    <div class="form-grid">
+
+        <div>
+            <label>Goal</label>
+            <input type="text" id="goalName"
+                   placeholder="Example: Complete Java Course">
+        </div>
+
+        <div>
+            <label>Target Date</label>
+            <input type="date" id="goalDate">
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="addGoal()">
+        Add Goal
+    </button>
+
+</div>
+
+
+<div class="panel">
+
+    <h2>My Goals</h2>
+
+    <div id="goalList">
+        No goals added.
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ================= NOTIFICATIONS ================= -->
+
+<div id="notifications" class="section">
+
+```
+<div class="header">
+    <div>
+        <h1>Notifications</h1>
+        <p>Important updates and learning alerts.</p>
+    </div>
+</div>
+
+
+<div class="panel">
+
+    <div id="notificationList">
+
+        <div class="notification">
+            Welcome to the Student Skill Development Management System.
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ================= MENTOR ================= -->
+
+<div id="mentor" class="section">
+
+```
+<div class="header">
+    <div>
+        <h1>Mentor Feedback</h1>
+        <p>View feedback and guidance from your mentor.</p>
+    </div>
+</div>
+
+
+<div class="panel">
+
+    <h2>Mentor Feedback</h2>
+
+    <div class="recommendation">
+
+        <h3>Mentor Guidance</h3>
+
+        <p>
+            Continue improving technical skills by completing
+            projects and certifications. Focus on skills with
+            larger competency gaps.
+        </p>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<div class="footer">
+
+```
+Student Skill Development Management System |
+Internet Programming Assignment
+```
+
+</div>
+
+</div>
+
+<script>
+
+/* ================= DATA STORAGE ================= */
+
+let skills = [];
+let assessments = [];
+let certificates = [];
+let projects = [];
+let goals = [];
+
+
+/* ================= NAVIGATION ================= */
+
+function showSection(sectionId, button) {
+
+    const sections =
+        document.querySelectorAll(".section");
+
+    sections.forEach(function(section) {
+
+        section.classList.remove("active-section");
+
+    });
+
+    document
+        .getElementById(sectionId)
+        .classList.add("active-section");
+
+
+    const buttons =
+        document.querySelectorAll(".sidebar button");
+
+    buttons.forEach(function(btn) {
+
+        btn.classList.remove("active");
+
+    });
+
+    button.classList.add("active");
+
+}
+
+
+/* ================= PROFILE ================= */
+
+function saveProfile() {
+
+    const name =
+        document
+        .getElementById("profileName")
+        .value;
+
+    const email =
+        document
+        .getElementById("profileEmail")
+        .value;
+
+
+    if (name === "" || email === "") {
+
+        alert("Please enter name and email.");
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("studentNameDisplay")
+        .innerText = name;
+
+
+    addNotification(
+        "Profile updated successfully."
+    );
+
+
+    alert("Profile saved successfully!");
+
+}
+
+
+/* ================= SKILL FUNCTIONS ================= */
+
+function addSkill() {
+
+    const name =
+        document
+        .getElementById("skillName")
+        .value
+        .trim();
+
+    const category =
+        document
+        .getElementById("skillCategory")
+        .value;
+
+    const current =
+        parseInt(
+            document
+            .getElementById("currentLevel")
+            .value
+        );
+
+    const target =
+        parseInt(
+            document
+            .getElementById("targetLevel")
+            .value
+        );
+
+
+    if (name === "") {
+
+        alert("Please enter a skill name.");
+
+        return;
+
+    }
+
+
+    if (current > target) {
+
+        alert(
+            "Current skill level should not be greater than target level."
+        );
+
+        return;
+
+    }
+
+
+    const duplicate =
+        skills.some(function(skill) {
+
+            return skill.name.toLowerCase() ===
+                name.toLowerCase();
+
+        });
+
+
+    if (duplicate) {
+
+        alert("This skill already exists.");
+
+        return;
+
+    }
+
+
+    const skill = {
+
+        name: name,
+        category: category,
+        current: current,
+        target: target
+
+    };
+
+
+    skills.push(skill);
+
+
+    document
+        .getElementById("skillName")
+        .value = "";
+
+
+    updateSkillTable();
+
+    updateDashboard();
+
+    updateRecommendations();
+
+    addNotification(
+        name + " skill was added successfully."
+    );
+
+
+    alert("Skill added successfully!");
+
+}
+
+
+/* ================= SKILL GAP ================= */
+
+function getSkillGapStatus(gap) {
+
+    if (gap <= 0) {
+
+        return "Target Achieved";
+
+    }
+
+    else if (gap === 1) {
+
+        return "Minor Improvement";
+
+    }
+
+    else if (gap === 2) {
+
+        return "Moderate Improvement";
+
+    }
+
+    else {
+
+        return "Major Improvement Required";
+
+    }
+
+}
+
+
+/* ================= PROGRESS ================= */
+
+function calculateProgress(current, target) {
+
+    let progress =
+        (current / target) * 100;
+
+
+    if (progress > 100) {
+
+        progress = 100;
+
+    }
+
+
+    return progress;
+
+}
+
+
+/* ================= RECOMMENDATION ================= */
+
+function getRecommendation(level) {
+
+    if (level <= 2) {
+
+        return
+        "Beginner course and basic practice exercises.";
+
+    }
+
+    else if (level === 3) {
+
+        return
+        "Intermediate course and practical assignments.";
+
+    }
+
+    else if (level === 4) {
+
+        return
+        "Advanced projects and certification.";
+
+    }
+
+    else {
+
+        return
+        "Industry-level projects and mentoring.";
+
+    }
+
+}
+
+
+/* ================= UPDATE SKILL TABLE ================= */
+
+function updateSkillTable() {
+
+    const table =
+        document
+        .getElementById("skillTableBody");
+
+
+    table.innerHTML = "";
+
+
+    if (skills.length === 0) {
+
+        table.innerHTML =
+        "<tr><td colspan='8'>No skills added yet.</td></tr>";
+
+        return;
+
+    }
+
+
+    skills.forEach(function(skill, index) {
+
+        const gap =
+            skill.target - skill.current;
+
+
+        const progress =
+            calculateProgress(
+                skill.current,
+                skill.target
+            );
+
+
+        let badgeClass =
+            "success";
+
+
+        if (gap === 1) {
+
+            badgeClass = "warning";
+
+        }
+
+        else if (gap >= 2) {
+
+            badgeClass = "danger";
+
+        }
+
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>${skill.name}</td>
+
+            <td>${skill.category}</td>
+
+            <td>${skill.current}/5</td>
+
+            <td>${skill.target}/5</td>
+
+            <td>
+                <span class="badge ${badgeClass}">
+                    ${gap} -
+                    ${getSkillGapStatus(gap)}
+                </span>
+            </td>
+
+            <td>
+
+                ${progress.toFixed(0)}%
+
+                <br><br>
+
+                <div class="progress-container">
+
+                    <div
+                        class="progress-bar"
+                        style="width:${progress}%">
+
+                    </div>
+
+                </div>
+
+            </td>
+
+            <td>
+                ${getRecommendation(skill.current)}
+            </td>
+
+            <td>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteSkill(${index})">
+
+                    Delete
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* ================= DELETE SKILL ================= */
+
+function deleteSkill(index) {
+
+    const removedSkill =
+        skills[index].name;
+
+
+    skills.splice(index, 1);
+
+
+    updateSkillTable();
+
+    updateDashboard();
+
+    updateRecommendations();
+
+
+    addNotification(
+        removedSkill + " was removed from your skill profile."
+    );
+
+}
+
+
+/* ================= DASHBOARD ================= */
+
+function updateDashboard() {
+
+    document
+        .getElementById("totalSkills")
+        .innerText =
+        skills.length;
+
+
+    document
+        .getElementById("totalCertificates")
+        .innerText =
+        certificates.length;
+
+
+    document
+        .getElementById("totalProjects")
+        .innerText =
+        projects.length;
+
+
+    if (skills.length === 0) {
+
+        document
+            .getElementById("averageProgress")
+            .innerText = "0%";
+
+
+        document
+            .getElementById("overallProgressBar")
+            .style.width = "0%";
+
+
+        document
+            .getElementById("overallProgressText")
+            .innerText =
+            "Add skills to calculate your progress.";
+
+        return;
+
+    }
+
+
+    let totalProgress = 0;
+
+
+    skills.forEach(function(skill) {
+
+        totalProgress +=
+            calculateProgress(
+                skill.current,
+                skill.target
+            );
+
+    });
+
+
+    const average =
+        totalProgress /
+        skills.length;
+
+
+    document
+        .getElementById("averageProgress")
+        .innerText =
+        average.toFixed(0) + "%";
+
+
+    document
+        .getElementById("overallProgressBar")
+        .style.width =
+        average + "%";
+
+
+    document
+        .getElementById("overallProgressText")
+        .innerText =
+        "Overall skill development progress: " +
+        average.toFixed(0) + "%";
+
+}
+
+
+/* ================= RECOMMENDATIONS ================= */
+
+function updateRecommendations() {
+
+    const list =
+        document
+        .getElementById("recommendationList");
+
+
+    list.innerHTML = "";
+
+
+    if (skills.length === 0) {
+
+        list.innerHTML =
+        "<p>Add skills to receive personalized learning recommendations.</p>";
+
+        return;
+
+    }
+
+
+    skills.forEach(function(skill) {
+
+        const gap =
+            skill.target -
+            skill.current;
+
+
+        list.innerHTML += `
+
+        <div class="recommendation">
+
+            <h3>
+                ${skill.name}
+            </h3>
+
+            <p>
+                Current Level:
+                <strong>${skill.current}/5</strong>
+            </p>
+
+            <p>
+                Target Level:
+                <strong>${skill.target}/5</strong>
+            </p>
+
+            <p>
+                Skill Gap:
+                <strong>${gap}</strong>
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Recommended Activity:</strong>
+                ${getRecommendation(skill.current)}
+            </p>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ================= ASSESSMENT ================= */
+
+function addAssessment() {
+
+    const skill =
+        document
+        .getElementById("assessmentSkill")
+        .value
+        .trim();
+
+    const score =
+        document
+        .getElementById("assessmentScore")
+        .value;
+
+    const date =
+        document
+        .getElementById("assessmentDate")
+        .value;
+
+
+    if (
+        skill === "" ||
+        score === "" ||
+        date === ""
+    ) {
+
+        alert("Please fill all assessment details.");
+
+        return;
+
+    }
+
+
+    const assessment = {
+
+        skill: skill,
+        score: Number(score),
+        date: date
+
+    };
+
+
+    assessments.push(assessment);
+
+
+    updateAssessmentTable();
+
+
+    addNotification(
+        "Assessment result for " +
+        skill +
+        " was saved."
+    );
+
+
+    alert("Assessment saved successfully!");
+
+
+    document
+        .getElementById("assessmentSkill")
+        .value = "";
+
+    document
+        .getElementById("assessmentScore")
+        .value = "";
+
+    document
+        .getElementById("assessmentDate")
+        .value = "";
+
+}
+
+
+function updateAssessmentTable() {
+
+    const table =
+        document
+        .getElementById("assessmentTableBody");
+
+
+    table.innerHTML = "";
+
+
+    assessments.forEach(function(item) {
+
+        let performance = "";
+
+
+        if (item.score >= 80) {
+
+            performance =
+            '<span class="badge success">Excellent</span>';
+
+        }
+
+        else if (item.score >= 60) {
+
+            performance =
+            '<span class="badge warning">Good</span>';
+
+        }
+
+        else {
+
+            performance =
+            '<span class="badge danger">Needs Improvement</span>';
+
+        }
+
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>${item.skill}</td>
+
+            <td>${item.score}/100</td>
+
+            <td>${item.date}</td>
+
+            <td>${performance}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* ================= CERTIFICATION ================= */
+
+function addCertificate() {
+
+    const name =
+        document
+        .getElementById("certificateName")
+        .value
+        .trim();
+
+    const organization =
+        document
+        .getElementById("certificateOrganization")
+        .value
+        .trim();
+
+    const date =
+        document
+        .getElementById("certificateDate")
+        .value;
+
+
+    if (
+        name === "" ||
+        organization === "" ||
+        date === ""
+    ) {
+
+        alert("Please fill all certification details.");
+
+        return;
+
+    }
+
+
+    certificates.push({
+
+        name: name,
+        organization: organization,
+        date: date
+
+    });
+
+
+    updateCertificateTable();
+
+    updateDashboard();
+
+
+    addNotification(
+        "Certification " +
+        name +
+        " was added."
+    );
+
+
+    alert("Certification added successfully!");
+
+
+    document
+        .getElementById("certificateName")
+        .value = "";
+
+    document
+        .getElementById("certificateOrganization")
+        .value = "";
+
+    document
+        .getElementById("certificateDate")
+        .value = "";
+
+}
+
+
+function updateCertificateTable() {
+
+    const table =
+        document
+        .getElementById("certificateTableBody");
+
+
+    table.innerHTML = "";
+
+
+    certificates.forEach(function(item, index) {
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>${item.name}</td>
+
+            <td>${item.organization}</td>
+
+            <td>${item.date}</td>
+
+            <td>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteCertificate(${index})">
+
+                    Delete
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+function deleteCertificate(index) {
+
+    certificates.splice(index, 1);
+
+    updateCertificateTable();
+
+    updateDashboard();
+
+}
+
+
+/* ================= PROJECT ================= */
+
+function addProject() {
+
+    const name =
+        document
+        .getElementById("projectName")
+        .value
+        .trim();
+
+    const technology =
+        document
+        .getElementById("projectTechnology")
+        .value
+        .trim();
+
+    const status =
+        document
+        .getElementById("projectStatus")
+        .value;
+
+    const description =
+        document
+        .getElementById("projectDescription")
+        .value
+        .trim();
+
+
+    if (
+        name === "" ||
+        technology === "" ||
+        description === ""
+    ) {
+
+        alert("Please fill all project details.");
+
+        return;
+
+    }
+
+
+    projects.push({
+
+        name: name,
+        technology: technology,
+        status: status,
+        description: description
+
+    });
+
+
+    updateProjectTable();
+
+    updateDashboard();
+
+
+    addNotification(
+        "Project " +
+        name +
+        " was added."
+    );
+
+
+    alert("Project added successfully!");
+
+
+    document
+        .getElementById("projectName")
+        .value = "";
+
+    document
+        .getElementById("projectTechnology")
+        .value = "";
+
+    document
+        .getElementById("projectDescription")
+        .value = "";
+
+}
+
+
+function updateProjectTable() {
+
+    const table =
+        document
+        .getElementById("projectTableBody");
+
+
+    table.innerHTML = "";
+
+
+    projects.forEach(function(item, index) {
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>${item.name}</td>
+
+            <td>${item.technology}</td>
+
+            <td>${item.status}</td>
+
+            <td>${item.description}</td>
+
+            <td>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteProject(${index})">
+
+                    Delete
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+function deleteProject(index) {
+
+    projects.splice(index, 1);
+
+    updateProjectTable();
+
+    updateDashboard();
+
+}
+
+
+/* ================= GOALS ================= */
+
+function addGoal() {
+
+    const goal =
+        document
+        .getElementById("goalName")
+        .value
+        .trim();
+
+    const date =
+        document
+        .getElementById("goalDate")
+        .value;
+
+
+    if (
+        goal === "" ||
+        date === ""
+    ) {
+
+        alert("Please enter goal and target date.");
+
+        return;
+
+    }
+
+
+    goals.push({
+
+        goal: goal,
+        date: date
+
+    });
+
+
+    updateGoalList();
+
+
+    addNotification(
+        "New learning goal added: " +
+        goal
+    );
+
+
+    document
+        .getElementById("goalName")
+        .value = "";
+
+    document
+        .getElementById("goalDate")
+        .value = "";
+
+}
+
+
+function updateGoalList() {
+
+    const list =
+        document
+        .getElementById("goalList");
+
+
+    list.innerHTML = "";
+
+
+    goals.forEach(function(item) {
+
+        list.innerHTML += `
+
+        <div class="recommendation">
+
+            <h3>${item.goal}</h3>
+
+            <p>
+                Target Date:
+                <strong>${item.date}</strong>
+            </p>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ================= NOTIFICATIONS ================= */
+
+function addNotification(message) {
+
+    const list =
+        document
+        .getElementById("notificationList");
+
+
+    const notification =
+        document.createElement("div");
+
+
+    notification.className =
+        "notification";
+
+
+    notification.innerText =
+        message;
+
+
+    list.prepend(notification);
+
+}
+
+
+/* ================= INITIALIZATION ================= */
+
+updateDashboard();
+
+</script>
+
+</body>
+</html>
